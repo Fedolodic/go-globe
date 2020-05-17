@@ -53,7 +53,6 @@ const getForecast = async () => {
 // Render functions
 const renderVenues = (venues) => {
     $venueDivs.forEach(($venue, index) => {
-        // Add your code here:
         const venue = venues[index];
         const venueIcon = venue.categories[0].icon;
         const venueImgSrc = `${venueIcon.prefix}bg_64${venueIcon.suffix}`;
@@ -64,9 +63,7 @@ const renderVenues = (venues) => {
 }
 
 const renderForecast = (day) => {
-    // Add your code here:
-
-    let weatherContent = '';
+    const weatherContent = createWeatherHTML(day);
     $weatherDiv.append(weatherContent);
 }
 
@@ -76,7 +73,7 @@ const executeSearch = () => {
     $destination.empty();
     $container.css("visibility", "visible");
     getVenues().then(venues => renderVenues(venues));
-    getForecast()
+    getForecast().then(forecast => renderForecast(forecast));
     return false;
 }
 
